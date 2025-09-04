@@ -1,0 +1,11 @@
+#goal definition - name of joint + goal angle in degrees
+string name
+int32 desired_angle
+int32 stepsize
+---
+#result definition - final angle in degrees
+int32 final_angle
+---
+#feedback - current angle in degrees
+string name
+int32 current_angle
