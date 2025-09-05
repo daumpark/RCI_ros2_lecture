@@ -11,7 +11,7 @@ def generate_launch_description():
         ),
 
         Node (
-            package='launch_tutorial',
+            package='launch_tutorial_cpp',
             executable='reverse_node',
             name='reverse',
         ),
@@ -23,6 +23,4 @@ def generate_launch_description():
             output='screen',
             prefix='xterm -e',
         ),
-
-
     ])

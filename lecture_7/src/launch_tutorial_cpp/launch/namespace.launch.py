@@ -3,34 +3,39 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     return LaunchDescription([
-        Node (
+        Node(
             package='turtlesim',
             executable='turtlesim_node',
-            name='turtle1',
+            name='turtlesim',
             namespace='sim1',
-        ),
-        Node (
-            package='turtlesim',
-            executable='turtle_teleop_key',
-            name='telop_key',
             output='screen',
-            prefix='xterm -e',
-            namespace='sim1',
+            respawn=True,
         ),
 
-        Node (
+        Node(
+            package='turtlesim',
+            executable='turtle_teleop_key',
+            name='teleop_key',
+            namespace='sim1',
+            output='screen',
+            prefix='xterm -e',
+        ),
+
+        Node(
             package='turtlesim',
             executable='turtlesim_node',
-            name='turtle1',
+            name='turtlesim',
             namespace='sim2',
+            output='screen',
+            respawn=True,
         ),
 
-        Node (
+        Node(
             package='turtlesim',
             executable='turtle_teleop_key',
-            name='telop_key',
+            name='teleop_key',
+            namespace='sim2',
             output='screen',
             prefix='xterm -e',
-            namespace='sim2',
         ),
     ])

@@ -1,9 +1,9 @@
 #include "rclcpp/rclcpp.hpp"
 
-class HelloWorldNode: public rclcpp::Node
+class HelloWorldNode : public rclcpp::Node
 {
 public:
-    HelloWorldNode(): Node("hello_world_node")
+    HelloWorldNode() : Node("hello_world_node")
     {
     }
 };

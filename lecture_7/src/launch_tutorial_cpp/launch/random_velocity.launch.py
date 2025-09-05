@@ -3,10 +3,16 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     return LaunchDescription([
-        Node (
+        Node(
             package='turtlesim',
             executable='turtlesim_node',
             name='turtle1',
-            remappings=[('/turtle1/pose', 'tim')]
         ),
+
+        Node(
+            package='launch_tutorial_cpp',
+            executable='random_velocity_node',
+            name='random_velocity_node',
+            parameters=[{'cmd_vel_rate': 1.0}]
+        )
     ])

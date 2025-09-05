@@ -1,9 +1,9 @@
 #include "rclcpp/rclcpp.hpp"
 
-class LoggingNode: public rclcpp::Node
+class LoggingNode : public rclcpp::Node
 {
 public:
-    LoggingNode(): Node("logging_node"), i_(1)
+    LoggingNode() : Node("logging_node"), i_(1)
     {
         timer_ = this->create_wall_timer(
             std::chrono::seconds(1),
