@@ -29,4 +29,5 @@ int main(int argv, char *argc[])
     auto node = std::make_shared<SubPoseNode>();
     rclcpp::spin(node);
     rclcpp::shutdown();
+    return 0;
 }

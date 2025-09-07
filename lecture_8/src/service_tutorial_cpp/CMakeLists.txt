@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(launch_tutorial_cpp)
+project(service_tutorial_cpp)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,10 +7,11 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(topic_tutorial_cpp REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(geometry_msgs REQUIRED)
 find_package(turtlesim REQUIRED)
+find_package(std_srvs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(my_srv REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -24,27 +25,31 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-add_executable(reverse_node src/reverse_node.cpp)
-add_executable(random_velocity_node src/random_velocity_node.cpp)
+add_executable(spawn_turtle_client src/turtle_spawn.cpp)
+add_executable(pubvel_toggle src/velocity_toggle.cpp)
+add_executable(pubvel_toggle_rate src/velocity_toggle_plus_service.cpp)
 
-ament_target_dependencies(reverse_node
+ament_target_dependencies(spawn_turtle_client
   rclcpp
-  geometry_msgs
+  turtlesim
 )
 
-ament_target_dependencies(random_velocity_node
+ament_target_dependencies(pubvel_toggle
   rclcpp
+  std_srvs
   geometry_msgs
 )
-
-install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}
+ament_target_dependencies(pubvel_toggle_rate
+  rclcpp
+  std_srvs
+  geometry_msgs
+  my_srv
 )
 
 install(TARGETS
-  reverse_node
-  random_velocity_node
+  spawn_turtle_client
+  pubvel_toggle
+  pubvel_toggle_rate
   DESTINATION lib/${PROJECT_NAME}
 )
 

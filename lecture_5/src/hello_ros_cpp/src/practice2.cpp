@@ -14,4 +14,5 @@ int main(int argc, char *argv[])
     auto node = std::make_shared<HelloWorldNode>();
     RCLCPP_INFO(node->get_logger(), "Hello World!");
     rclcpp::shutdown();
+    return 0;
 }

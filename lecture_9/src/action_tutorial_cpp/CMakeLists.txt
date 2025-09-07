@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(launch_tutorial_cpp)
+project(action_tutorial_cpp)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,10 +7,9 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(topic_tutorial_cpp REQUIRED)
+find_package(action_tutorial_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(turtlesim REQUIRED)
+find_package(rclcpp_action REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -24,27 +23,24 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-add_executable(reverse_node src/reverse_node.cpp)
-add_executable(random_velocity_node src/random_velocity_node.cpp)
+add_executable(action_server src/fibonacci_action_server.cpp)
+add_executable(action_client src/fibonacci_action_client.cpp)
 
-ament_target_dependencies(reverse_node
+ament_target_dependencies(action_server
+  action_tutorial_interfaces
   rclcpp
-  geometry_msgs
+  rclcpp_action
 )
 
-ament_target_dependencies(random_velocity_node
+ament_target_dependencies(action_client
+  action_tutorial_interfaces
   rclcpp
-  geometry_msgs
-)
-
-install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}
+  rclcpp_action
 )
 
 install(TARGETS
-  reverse_node
-  random_velocity_node
+  action_server
+  action_client
   DESTINATION lib/${PROJECT_NAME}
 )
 
